@@ -1,63 +1,84 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu, Drawer, Button } from "antd";
-import {
-  HomeOutlined,
-  UserOutlined,
-  AppstoreOutlined,
-  MenuOutlined,  // Changed icon to hamburger icon
-  SettingOutlined,
-} from "@ant-design/icons";
-import "./Navbar.css"; // Import external CSS file
+import { Drawer, Button } from "antd";
+import { MenuOutlined, CloseOutlined, DownOutlined } from "@ant-design/icons";
 
 const Navbar = () => {
-  const [visible, setVisible] = useState(false); // Drawer visibility state
+  const [visible, setVisible] = useState(false);
 
-  // Toggle drawer visibility
   const showDrawer = () => setVisible(true);
   const closeDrawer = () => setVisible(false);
 
-  const menuItems = [
-    {
-      key: "home",
-      icon: <HomeOutlined />,
-      label: <Link to="/">Home</Link>,
-    },
-    {
-      key: "help",
-      icon: <UserOutlined />,
-      label: <Link to="/help">Help</Link>,
-    },
-    {
-      key: "contact",
-      icon: <AppstoreOutlined />,
-      label: <Link to="/contact">Contact Us</Link>,
-    },
-    {
-      key: "submenu",
-      icon: <SettingOutlined />,
-      label: "More",
-      children: [
-        {
-          key: "signin",
-          label: <Link to="/signin">Sign In</Link>,
-        },
-        {
-          key: "signup",
-          label: <Link to="/signup">Sign Up</Link>,
-        },
-      ],
-    },
-  ];
-
   return (
-    <div className="navbar-container">
-      <Menu className="desktop-menu" mode="horizontal" theme="dark" defaultSelectedKeys={["home"]} items={menuItems} />
+    <nav className="navbar">
+      <div className="logo">
+        <Link to="/">
+          <span className="Brand-Name">IRONCORE</span>
+        </Link>
+      </div>
+
+      {/* Desktop Menu */}
+      <div className="nav-links">
+        <Link to="/help">
+          <span className="link-name">
+            Browse
+          </span>
+          <DownOutlined style={{
+            position: 'relative',
+            bottom: '5px',
+            right: '5px',
+            color: 'grey',
+            fontSize: '15px'
+          }} />
+
+
+
+
+
+        </Link>
+
+
+        <Link to="/help">
+          <span className="link-name">Market Place</span>
+        </Link>
+        <Link to="/contact">
+          <span className="link-name">Contact Us</span>
+        </Link>
+        <Link to="/help">
+          <span className="link-name">Help</span>
+        </Link>
+
+
+        <div className="divider">|</div>
+        <Link to="/signin">
+          <span className="link-name">Sign In</span>
+        </Link>
+        <Link to="/signup">
+          <span className="link-name signup">Sign Up</span>
+        </Link>
+      </div>
+
+      {/* Mobile Hamburger Button */}
       <Button className="mobile-menu-button" icon={<MenuOutlined />} onClick={showDrawer} />
-      <Drawer title="Menu" placement="right" closable onClose={closeDrawer} open={visible} width={250}>
-        <Menu mode="inline" theme="light" defaultSelectedKeys={["home"]} items={menuItems} onClick={closeDrawer} />
+
+      {/* Mobile Drawer Menu */}
+      <Drawer
+        title={<span>Menu</span>}
+        placement="right"
+        closable
+        closeIcon={<CloseOutlined />}
+        onClose={closeDrawer}
+        open={visible}
+      >
+        <div className="drawer-links">
+          <Link to="/" onClick={closeDrawer}>Home</Link>
+          <Link to="/help" onClick={closeDrawer}>Help</Link>
+          <Link to="/contact" onClick={closeDrawer}>Contact Us</Link>
+          <Link to="/signin" onClick={closeDrawer}>Sign In</Link>
+          <Link to="/signup" onClick={closeDrawer}>Sign Up</Link>
+        </div>
       </Drawer>
-    </div>
+    </nav>
   );
 };
 
