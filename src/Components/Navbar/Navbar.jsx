@@ -15,6 +15,7 @@ const Navbar = () => {
         <Link to="/">
           <span className="Brand-Name">IRONCORE</span>
         </Link>
+        
       </div>
 
       {/* Desktop Menu */}
@@ -71,11 +72,11 @@ const Navbar = () => {
         open={visible}
       >
         <div className="drawer-links">
-          <Link to="/" onClick={closeDrawer}>Home</Link>
-          <Link to="/help" onClick={closeDrawer}>Help</Link>
-          <Link to="/contact" onClick={closeDrawer}>Contact Us</Link>
-          <Link to="/signin" onClick={closeDrawer}>Sign In</Link>
-          <Link to="/signup" onClick={closeDrawer}>Sign Up</Link>
+          <Link className="link-name" to="/" onClick={closeDrawer}>Home</Link>
+          <Link className="link-name" to="/help" onClick={closeDrawer}>Help</Link>
+          <Link className="link-name" to="/contact" onClick={closeDrawer}>Contact Us</Link>
+          <Link className="link-name" to="/signin" onClick={closeDrawer}>Sign In</Link>
+          <Link className="link-name" to="/signup" onClick={closeDrawer}>Sign Up</Link>
         </div>
       </Drawer>
     </nav>
