@@ -1,50 +1,63 @@
-import React, { useState } from 'react';
-import { Layout, Button, Drawer } from 'antd';
-import LeftMenu from './LeftMenu';
-import RightMenu from './RightMenu';
-import { MenuOutlined } from '@ant-design/icons';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { Menu, Drawer, Button } from "antd";
+import {
+  HomeOutlined,
+  UserOutlined,
+  AppstoreOutlined,
+  MenuOutlined,  // Changed icon to hamburger icon
+  SettingOutlined,
+} from "@ant-design/icons";
+import "./Navbar.css"; // Import external CSS file
 
 const Navbar = () => {
-  const [visible, setVisible] = useState(false);
+  const [visible, setVisible] = useState(false); // Drawer visibility state
 
-  const showDrawer = () => {
-    setVisible(!visible);
-  };
+  // Toggle drawer visibility
+  const showDrawer = () => setVisible(true);
+  const closeDrawer = () => setVisible(false);
 
-  const onClose = () => {
-    setVisible(false);
-  };
+  const menuItems = [
+    {
+      key: "home",
+      icon: <HomeOutlined />,
+      label: <Link to="/">Home</Link>,
+    },
+    {
+      key: "help",
+      icon: <UserOutlined />,
+      label: <Link to="/help">Help</Link>,
+    },
+    {
+      key: "contact",
+      icon: <AppstoreOutlined />,
+      label: <Link to="/contact">Contact Us</Link>,
+    },
+    {
+      key: "submenu",
+      icon: <SettingOutlined />,
+      label: "More",
+      children: [
+        {
+          key: "signin",
+          label: <Link to="/signin">Sign In</Link>,
+        },
+        {
+          key: "signup",
+          label: <Link to="/signup">Sign Up</Link>,
+        },
+      ],
+    },
+  ];
 
   return (
-    <nav className="navbar">
-      <Layout.Header className="nav-header">
-        <div className="logo">
-          <h3 className="brand-font">Brand Here</h3>
-        </div>
-        <div className="navbar-menu">
-          <div className="leftMenu">
-            <LeftMenu mode="horizontal" />
-          </div>
-          <Button className="menuButton" type="text" onClick={showDrawer}>
-            <MenuOutlined />
-          </Button>
-          <div className="rightMenu">
-            <RightMenu mode="horizontal" />
-          </div>
-          <Drawer
-            title="Brand Here"
-            placement="right"
-            closable={true}
-            onClose={onClose}
-            open={visible}
-            style={{ zIndex: 99999 }}
-          >
-            <LeftMenu mode="inline" />
-            <RightMenu mode="inline" />
-          </Drawer>
-        </div>
-      </Layout.Header>
-    </nav>
+    <div className="navbar-container">
+      <Menu className="desktop-menu" mode="horizontal" theme="dark" defaultSelectedKeys={["home"]} items={menuItems} />
+      <Button className="mobile-menu-button" icon={<MenuOutlined />} onClick={showDrawer} />
+      <Drawer title="Menu" placement="right" closable onClose={closeDrawer} open={visible} width={250}>
+        <Menu mode="inline" theme="light" defaultSelectedKeys={["home"]} items={menuItems} onClick={closeDrawer} />
+      </Drawer>
+    </div>
   );
 };
 

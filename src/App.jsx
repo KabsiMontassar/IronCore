@@ -1,32 +1,25 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { Layout } from 'antd';
-import Navbar from './Components/Navbar/Navbar.jsx';
-import Home from './Pages/Accueil.jsx';
-import About from './Pages/Help.jsx';
-import Contact from './Pages/ContactUs.jsx';
-import Signup from './Pages/SignUp.jsx';
-import Login from './Pages/Login.jsx';
-import Help from './Pages/Help.jsx';
-
-function App() {
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./Components/Navbar/Navbar.jsx";
+import Accueil from "./Pages/Accueil.jsx";
+import ContactUs from "./Pages/ContactUs.jsx";
+import Help from "./Pages/Help.jsx";
+import SignUp from "./Pages/SignUp.jsx";
+import SignIn from "./Pages/LogIn.jsx";
+import "./App.css";
+const App = () => {
   return (
     <Router>
-      <Layout className="layout">
-        <Navbar />
-        <Layout.Content style={{ padding: '0 50px' }}>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/signin" element={<Login />} />
-            <Route path="/help" element={<Help />} />
-          </Routes>
-        </Layout.Content>
-      </Layout>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Accueil />} />
+        <Route path="/contact" element={<ContactUs />} />
+        <Route path="/help" element={<Help />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/signin" element={<SignIn />} />
+      </Routes>
     </Router>
   );
-}
+};
 
 export default App;
